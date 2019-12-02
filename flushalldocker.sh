@@ -35,3 +35,5 @@ cat /proc/net/ip_tables_names | while read table; do
   done
   $IPTABLES -t $table -X
 done
+
+shutdown -r now
