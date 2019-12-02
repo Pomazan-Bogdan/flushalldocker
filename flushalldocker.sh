@@ -33,6 +33,12 @@ for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }'
 
 rm -f /var/lib/containerd/io.containerd.metadata.v1.bolt/meta.db
 
+cleanupinterfaces="flannel.1 cni0 tunl0"
+for interface in $cleanupinterfaces; do
+  echo "Deleting $interface"
+  ip link delete $interface
+done
+
 IPTABLES="/sbin/iptables"
 cat /proc/net/ip_tables_names | while read table; do
   $IPTABLES -t $table -L -n | while read c chain rest; do
