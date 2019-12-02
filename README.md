@@ -1,4 +1,4 @@
-# flushalldocker
+# Extended Rancher 2 cleanup (backup your data, use at your own risk)
 
 Alert!! "shutdown -r now"
 
