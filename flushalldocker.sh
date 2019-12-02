@@ -1,7 +1,16 @@
 #!/bin/sh
 
-docker rm -f $(sudo docker ps -aq);
-docker volume rm $(sudo docker volume ls -q);
+docker stop $(docker ps -a -q)
+sudo docker stop $(sudo docker ps -a -q)
+
+docker rm $(docker ps -a -q)
+sudo docker rm $(sudo docker ps -a -q)
+
+docker rmi $(docker images -q)
+sudo docker rmi $(sudo docker images -q)
+
+docker volume rm $(docker volume ls -qf dangling=true)
+sudo docker volume rm $(sudo docker volume ls -qf dangling=true)
 
 rm -rf /etc/ceph \
        /etc/cni \
