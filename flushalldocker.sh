@@ -17,7 +17,7 @@ docker volume rm $(docker volume ls -qf dangling=true)
 sudo docker volume rm $(sudo docker volume ls -qf dangling=true)
 
 echo "rm ..."
-rm -rf /etc/ceph \
+sudo rm -rf /etc/ceph \
        /etc/cni \
        /etc/kubernetes \
        /opt/cni \
@@ -37,7 +37,7 @@ rm -rf /etc/ceph \
 for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
 
 echo "rm -f /var/lib/containerd/io.containerd.metadata.v1.bolt/meta.db"
-rm -f /var/lib/containerd/io.containerd.metadata.v1.bolt/meta.db
+sudo rm -f /var/lib/containerd/io.containerd.metadata.v1.bolt/meta.db
 
 cleanupinterfaces="flannel.1 cni0 tunl0"
 for interface in $cleanupinterfaces; do
@@ -56,4 +56,4 @@ cat /proc/net/ip_tables_names | while read table; do
 done
 
 echo "shutdown -r now"
-shutdown -r now
+sudo shutdown -r now
